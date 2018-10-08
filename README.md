@@ -1,4 +1,4 @@
-# hello-eth
+# eth-shamir-page vue cli3
 
 ## Project setup
 ```
