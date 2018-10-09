@@ -2,7 +2,7 @@
     <div id="app">
         <ul class="router-list">
             <li>
-                <router-link :to="{name: 'show'}">Create & Show</router-link>
+                <router-link :to="{name: 'show'}">Create & Show secret</router-link>
             </li>
             <li>
                 <router-link :to="{name: 'recover'}">Recover</router-link>

@@ -70,8 +70,8 @@ class ShamirSecret {
         }
 		let secret = Buffer.from(hexSecret, 'hex').toString('hex')
 		console.log('Derived secret (DEBUG)', secret);
-		window.sign = (priKey, txConfig) => {
-			this.sign(priKey, txConfig)
+		window.sign = txConfig => {
+			this.sign(secret, txConfig)
 		}
 		return this.sign(secret, {})
     }

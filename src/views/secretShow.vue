@@ -20,10 +20,10 @@
             <button @click='showSecret'
                 :disabled="btnDisable"
                 class="btn-show"
-                v-else>Show</button>
+                v-else>Show secret</button>
 
             <p v-show="address">Address: {{ address }}</p>
-            <p class="secret-order" v-if="secretParts.length">{{ totalShares }} - {{ order }}</p>
+            <p class="secret-order" v-if="secretParts.length">Secret {{ totalShares }} - {{ order }}</p>
             <div v-for="(item,index) in secretParts"
                 :key="index"
                 class="secret-item"
@@ -66,6 +66,7 @@
                         type: 'error'
                     })
                     this.btnDisable = true
+                    this.secretParts.shift()
                     return
                 }
                 this.secretParts.shift()

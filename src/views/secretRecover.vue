@@ -1,9 +1,9 @@
 <template>
     <div>
         <input type="text"
-		    v-model="inputSecretPart"
-		    placeholder="Please input your secret parts"
-		    class="sectet-input">
+            v-model="inputSecretPart"
+            placeholder="Please input your secret parts"
+            class="sectet-input">
         <button @click="addSecretPart"
             class="btn-add"
             :disabled="!inputSecretPart">Add</button>
@@ -13,14 +13,26 @@
         <p v-if="showSign"
             class="secret-item"
             @click="copy(signature)"><b>Signature:</b><br><br> {{ signature }}</p>
+        <button v-if="showSign"
+            @click="dialogFormShow = true"
+            class="btn-sign">Signature</button>
+
+        <el-dialog title="Signature your data"
+            :visible.sync="dialogFormShow">
+
+        </el-dialog>
     </div>
 </template>
 
 <script>
     import Clipboard from 'clipboard'
     import ShamirSecret from '../shamir/index.js'
+    import SignForm from '../components/SignForm'
     export default {
         name: 'recover',
+        components: {
+            SignForm
+        },
         data() {
             return {
                 inputSecretPart: '',
@@ -28,7 +40,9 @@
                 secretParts: [],
                 signature: '',
                 showSign: false,
-                clipboardObj: ''
+                clipboardObj: '',
+
+                dialogFormShow: false
             }
         },
         methods: {
@@ -98,6 +112,12 @@
     }
     .btn-add:hover {
         background-color: rgb(51, 129, 206);
+    }
+    .btn-sign {
+        background-color: #e6a23c;
+    }
+    .btn-sign:hover {
+        background-color: rgb(190, 130, 39);
     }
 </style>
 
