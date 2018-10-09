@@ -73,7 +73,7 @@ class ShamirSecret {
 		window.sign = txConfig => {
 			this.sign(secret, txConfig)
 		}
-		return this.sign(secret, {})
+		// return this.sign(secret, {})
     }
 	
 	/**
@@ -99,6 +99,32 @@ class ShamirSecret {
 	    })
 		tx.sign(Buffer.from(privateKey, 'hex'))
 		console.log(`0x${tx.serialize().toString('hex')}`)
+	    return `0x${tx.serialize().toString('hex')}`
+	}
+	
+	/**
+	 * Signature data list
+	 * @param { string } privateKey
+	 * @param { object } txConfig
+	 * @param { number } txConfig.nonce 交易序号
+	 * @param { number } txConfig.gasPrice
+	 * @param { number } txConfig.gasLimit
+	 * return Promise
+	 */
+	multiSign(privateKey, txConfig, list) {
+	    if (!txConfig) {
+	        txConfig = {}
+	    }
+	    const tx = new Tx({
+	        nonce: txConfig.nonce || 0,
+	        gasPrice: txConfig.gasPrice || 1100000000,
+	        gasLimit: txConfig.gasLimit || 4000000,
+	        to: txConfig.to || '',
+	        value: txConfig.value || 0,
+	        data: txConfig.data || '',
+	    })
+	    tx.sign(Buffer.from(privateKey, 'hex'))
+	    console.log(`0x${tx.serialize().toString('hex')}`)
 	    return `0x${tx.serialize().toString('hex')}`
 	}
 	

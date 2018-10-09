@@ -18,8 +18,11 @@
             class="btn-sign">Signature</button>
 
         <el-dialog title="Signature your data"
-            :visible.sync="dialogFormShow">
-
+            width="640px"
+            :visible.sync="dialogFormShow"
+            :close-on-click-modal="false"
+            :close-on-press-escape="false">
+            <sign-form @signData="sign"></sign-form>
         </el-dialog>
     </div>
 </template>
@@ -54,7 +57,7 @@
                 this.inputSecretPart = ''
                 this.showSign = false
             },
-            // 恢复私钥并对私钥进行签名（签名地址为本地geth中已解锁的账号地址）
+            // 恢复私钥
             async recoverSecret() {
                 try {
                     this.signature = await this.secretObj.recover()
@@ -63,9 +66,22 @@
                     this.secretObj.inputParts = []
                 } catch (e) {
                     console.log(e)
-                    this.$message({message: e, type: 'error'});
+                    this.$message({message: 'Invalid or not enough keys', type: 'error'});
                     this.secretParts = []
                     this.secretObj.inputParts = []
+                }
+            },
+            // 利用私钥进行签名
+            sign(data) {
+                console.log(data)
+                try {
+                    window.sign(data)
+                    this.dialogFormShow = false
+                } catch (e) {
+                    this.$message({
+                        message: e.message,
+                        type: 'error'
+                    })
                 }
             },
             // 复制
