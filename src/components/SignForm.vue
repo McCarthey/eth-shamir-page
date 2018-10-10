@@ -22,7 +22,7 @@
 			<p class="input-label">To: </p>
 			<input type="text"
 			 class="sign-dialog__input"
-			 v-model="config.to">
+			 v-model.trim="config.to">
 		</div>
 		<div class="input-wrap">
 			<p class="input-label">Value: </p>
@@ -34,7 +34,7 @@
 			<p class="input-label">Data: </p>
 			<input type="text"
 			 class="sign-dialog__input"
-			 v-model="config.data">
+			 v-model.trim="config.data">
 		</div>
 		<button class="btn-sign"
 		 @click="emitSign">Signature</button>
