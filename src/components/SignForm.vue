@@ -4,19 +4,19 @@
 			<p class="input-label">Nonce: </p>
 			<input type="number"
 			 class="sign-dialog__input"
-			 v-model="config.nonce">
+			 v-model.number="config.nonce">
 		</div>
 		<div class="input-wrap">
 			<p class="input-label">Gas Price: </p>
 			<input type="number"
 			 class="sign-dialog__input"
-			 v-model="config.gasPrice">
+			 v-model.number="config.gasPrice">
 		</div>
 		<div class="input-wrap">
 			<p class="input-label">Gas Limit: </p>
 			<input type="number"
 			 class="sign-dialog__input"
-			 v-model="config.gasLimit">
+			 v-model.number="config.gasLimit">
 		</div>
 		<div class="input-wrap">
 			<p class="input-label">To: </p>
@@ -28,7 +28,7 @@
 			<p class="input-label">Value: </p>
 			<input type="number"
 			 class="sign-dialog__input"
-			 v-model="config.value">
+			 v-model.number="config.value">
 		</div>
 		<div class="input-wrap">
 			<p class="input-label">Data: </p>
