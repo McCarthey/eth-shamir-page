@@ -41,7 +41,7 @@
                 inputSecretPart: '',
                 secretObj: '',
                 secretParts: [],
-                signature: 'You can signature your data now',
+                signature: '',
                 showSign: false,
                 clipboardObj: '',
 
@@ -61,6 +61,7 @@
             recoverSecret() {
                 try {
                     this.secretObj.recover()
+                    this.signature = 'Now you can signature your data'
                     this.showSign = true
                     this.secretParts = []
                     this.secretObj.inputParts = []
@@ -101,6 +102,10 @@
         },
         mounted() {
             this.secretObj = new ShamirSecret()
+        },
+        destroyed() {
+            window.sign = null
+            window.multiSign = null
         }
     }
 </script>

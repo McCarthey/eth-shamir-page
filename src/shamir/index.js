@@ -66,7 +66,7 @@ class ShamirSecret {
         if (derivedChecksum !== storedChecksum) {
             console.log('Checksum did not match, likely invalid or not enough keys');
             this.inputParts = []
-            return 'Checksum did not match, likely invalid or not enough keys'
+			throw new Error('Checksum did not match, likely invalid or not enough keys')
         }
 		let secret = Buffer.from(hexSecret, 'hex').toString('hex')
 		// console.log('Derived secret (DEBUG)', secret);
