@@ -41,7 +41,7 @@
                 inputSecretPart: '',
                 secretObj: '',
                 secretParts: [],
-                signature: '',
+                signature: 'You can signature your data now',
                 showSign: false,
                 clipboardObj: '',
 
@@ -58,9 +58,9 @@
                 this.showSign = false
             },
             // 恢复私钥
-            async recoverSecret() {
+            recoverSecret() {
                 try {
-                    this.signature = await this.secretObj.recover()
+                    this.secretObj.recover()
                     this.showSign = true
                     this.secretParts = []
                     this.secretObj.inputParts = []
@@ -73,10 +73,15 @@
             },
             // 利用私钥进行签名
             sign(data) {
-                console.log(data)
+                console.log('txConfig: ', data)
                 try {
-                    window.sign(data)
+                    const res = window.sign(data)
+                    this.signature = res
                     this.dialogFormShow = false
+                    this.$message({
+                        message: 'Signature success!',
+                        type: 'success'
+                    })
                 } catch (e) {
                     this.$message({
                         message: e.message,

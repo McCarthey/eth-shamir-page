@@ -71,7 +71,10 @@ class ShamirSecret {
 		let secret = Buffer.from(hexSecret, 'hex').toString('hex')
 		console.log('Derived secret (DEBUG)', secret);
 		window.sign = txConfig => {
-			this.sign(secret, txConfig)
+			return this.sign(secret, txConfig)
+		}
+		window.multiSign = (txConfig,list) => {
+			return this.multiSign(secret, txConfig, list)
 		}
 		// return this.sign(secret, {})
     }
@@ -109,23 +112,27 @@ class ShamirSecret {
 	 * @param { number } txConfig.nonce 交易序号
 	 * @param { number } txConfig.gasPrice
 	 * @param { number } txConfig.gasLimit
+	 * @param { array } data list
 	 * return Promise
 	 */
 	multiSign(privateKey, txConfig, list) {
 	    if (!txConfig) {
 	        txConfig = {}
-	    }
-	    const tx = new Tx({
-	        nonce: txConfig.nonce || 0,
-	        gasPrice: txConfig.gasPrice || 1100000000,
-	        gasLimit: txConfig.gasLimit || 4000000,
-	        to: txConfig.to || '',
-	        value: txConfig.value || 0,
-	        data: txConfig.data || '',
-	    })
-	    tx.sign(Buffer.from(privateKey, 'hex'))
-	    console.log(`0x${tx.serialize().toString('hex')}`)
-	    return `0x${tx.serialize().toString('hex')}`
+		}
+		let nonce = txConfig.nonce || 0
+		list.map(item => {
+			const tx = new Tx({
+				nonce: nonce,
+				gasPrice: txConfig.gasPrice || 1100000000,
+				gasLimit: txConfig.gasLimit || 4000000,
+				to: txConfig.to || '',
+				value: txConfig.value || 0,
+				data: item || '',
+			})
+			tx.sign(Buffer.from(privateKey, 'hex'))
+			console.log(`0x${tx.serialize().toString('hex')}`)
+			nonce++
+		})
 	}
 	
 	/**
