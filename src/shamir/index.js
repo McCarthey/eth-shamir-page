@@ -69,7 +69,7 @@ class ShamirSecret {
             return 'Checksum did not match, likely invalid or not enough keys'
         }
 		let secret = Buffer.from(hexSecret, 'hex').toString('hex')
-		console.log('Derived secret (DEBUG)', secret);
+		// console.log('Derived secret (DEBUG)', secret);
 		window.sign = txConfig => {
 			return this.sign(secret, txConfig)
 		}

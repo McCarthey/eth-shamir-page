@@ -73,7 +73,7 @@
                 this.secretParts.push(part.value)
                 this.copy(part.value)
                 this.order ++ 
-                console.log(part, '(DEBUG)')
+                // console.log(part, '(DEBUG)')
             },
             /**
              * 创建以太坊账号，生成5份私钥
@@ -98,7 +98,7 @@
                 this.hasAccount = false
                 this.secretShow = secret.show()
                 const res = secret.create(totalShares, requiredShares)
-                console.log(res, '(DEBUG)')
+                // console.log(res, '(DEBUG)')
                 if (res) {
                     this.address = res.address
                 }
