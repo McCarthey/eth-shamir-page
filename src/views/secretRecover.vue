@@ -20,7 +20,6 @@
         <el-dialog title="Signature your data"
             width="640px"
             :visible.sync="dialogFormShow"
-            :close-on-click-modal="false"
             :close-on-press-escape="false">
             <sign-form @signData="sign"></sign-form>
         </el-dialog>
